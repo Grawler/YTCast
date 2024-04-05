@@ -65,7 +65,7 @@ while keep_playing:
                 videoFound = True
                 print("Found very long video")
                 break
-        if longVid < 1:
+        if longVid < 2:
             randomVid = getrandomvid()
             randomUrl = getrandomurl()
             if 1800 < video_length[randomVid] <= 7200:
@@ -81,7 +81,7 @@ while keep_playing:
                 videoFound = True
                 print("Found short video, counter: " + str(shortVid))
                 break
-        if verylongVid > 0 and longVid > 0 and shortVid >= 3:
+        if verylongVid > 0 and longVid > 1 and shortVid >= 3:
             longVid = 0
             verylongVid = 0
             shortVid = 0
@@ -89,7 +89,7 @@ while keep_playing:
     try:
         vidstreams = pytube.YouTube(randomUrl).streams.get_highest_resolution()
     except:
-        print("Found error, selecting new random video.")
+        print("Found error, selecting new random video. Error found in: " + str(video_titles[randomVid]))
         randomVid = getrandomvid()
         randomUrl = getrandomurl()
         vidstreams = pytube.YouTube(randomUrl).streams.get_highest_resolution()
