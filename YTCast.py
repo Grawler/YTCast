@@ -20,7 +20,6 @@ randomUrl = ""
 randomVid = 0
 shortVid = 0
 longVid = 0
-verylongVid = 0
 videoFound = False
 
 # Populate arrays with url, title and length of each video
@@ -57,18 +56,10 @@ def getrandomurl():
 while keep_playing:
 
     while not videoFound:
-        if verylongVid < 1:
+        if longVid < 1:
             randomVid = getrandomvid()
             randomUrl = getrandomurl()
-            if video_length[randomVid] > 7200:
-                verylongVid += 1
-                videoFound = True
-                print("Found very long video")
-                break
-        if longVid < 2:
-            randomVid = getrandomvid()
-            randomUrl = getrandomurl()
-            if 1800 < video_length[randomVid] <= 7200:
+            if video_length[randomVid] >= 1800:
                 longVid += 1
                 videoFound = True
                 print("Found long video")
@@ -81,9 +72,8 @@ while keep_playing:
                 videoFound = True
                 print("Found short video, counter: " + str(shortVid))
                 break
-        if verylongVid > 0 and longVid > 1 and shortVid >= 3:
+        if longVid > 0 and shortVid >= 3:
             longVid = 0
-            verylongVid = 0
             shortVid = 0
             print("Counters reset")
     try:
