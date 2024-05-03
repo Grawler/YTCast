@@ -79,6 +79,11 @@ while keep_playing:
     try:
         vidstreams = pytube.YouTube(randomUrl).streams.get_highest_resolution()
     except:
+        # https://github.com/pytube/pytube/issues/1712 for a fix for "AgeRestrictedError" (edit pytube main.py and
+        # change line 253 to client="ANDROID_CREATOR"
+        # then another fix:
+        # https://stackoverflow.com/questions/70776558/pytube-exceptions-regexmatcherror-init-could-not-find-match-for-w-w
+        # edit pytube cipher.py line 30 to var_regex = re.compile(r"^\$*\w+\W")
         print("Found error, selecting new random video. Error found in: " + str(video_titles[randomVid]))
         randomVid = getrandomvid()
         randomUrl = getrandomurl()
